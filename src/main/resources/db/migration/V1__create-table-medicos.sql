@@ -1,10 +1,10 @@
-create table medicos(
-    id bigint not null auto_increment,
-    nome varchar(100) not null,
-    email varchar(100) not null unique,
-    telefone varchar(20) not null,
-    crm varchar(6) not null unique,
-    especialidade varchar(100) not null,
+CREATE TABLE medicos (
+    id BIGINT NOT NULL IDENTITY(1,1),
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    telefone VARCHAR(20) NOT NULL,
+    crm VARCHAR(6) NOT NULL UNIQUE,
+    especialidade VARCHAR(100) NOT NULL,
 
-    primary key(id)
+    PRIMARY KEY(id)
 );

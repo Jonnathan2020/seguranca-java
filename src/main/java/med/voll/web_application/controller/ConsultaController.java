@@ -13,7 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("consultas")
+@RequestMapping("/consultas")
 public class ConsultaController {
 
     private static final String PAGINA_LISTAGEM = "consulta/listagem-consultas";
