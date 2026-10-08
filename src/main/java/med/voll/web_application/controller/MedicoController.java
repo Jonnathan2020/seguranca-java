@@ -10,6 +10,7 @@ import med.voll.web_application.domain.usuario.Perfil;
 import med.voll.web_application.domain.usuario.Usuario;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,6 +40,7 @@ public class MedicoController {
     }
 
     @GetMapping
+    @PreAuthorize("hasRole('ATENDENTE') OR hasRole('PACIENTE')")
     public String carregarPaginaListagem(@PageableDefault Pageable paginacao, Model model, @AuthenticationPrincipal Usuario logado) {
         if(logado.getPerfil() == Perfil.MEDICO){
             return PAGINA_ERRO;
@@ -49,6 +51,7 @@ public class MedicoController {
     }
 
     @GetMapping("formulario")
+    @PreAuthorize("hasRole('ATENDENTE')")
     public String carregarPaginaCadastro(Long id, Model model, @AuthenticationPrincipal Usuario logado) {
 
         if(logado.getPerfil() != Perfil.ATENDENTE){
@@ -64,6 +67,7 @@ public class MedicoController {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('ATENDENTE')")
     public String cadastrar(@Valid @ModelAttribute("dados") DadosCadastroMedico dados, BindingResult result, Model model, @AuthenticationPrincipal Usuario logado) {
 
         if(logado.getPerfil() != Perfil.ATENDENTE){
